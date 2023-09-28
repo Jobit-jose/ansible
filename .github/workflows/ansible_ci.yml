@@ -32,4 +32,4 @@ jobs:
         pip install ansible
 
     - name: Run Ansible playbook
-      run: ansible-playbook --ssh-common-args StrictHostKeyChecking=no apache.yml
+      run: ansible-playbook --ssh-common-args "StrictHostKeyChecking=no" apache.yml
