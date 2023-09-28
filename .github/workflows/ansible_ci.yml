@@ -32,5 +32,4 @@ jobs:
         pip install ansible
 
     - name: Run Ansible playbook
-      run: |
-        ansible-playbook  apache.yml
+      run: StrictHostKeyChecking=no ansible-playbook  apache.yml
