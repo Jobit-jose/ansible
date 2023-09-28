@@ -3,33 +3,33 @@ name: Ansible CI
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Create SSH directory
-      run: mkdir -p ~/.ssh
+      - name: Create SSH directory
+        run: mkdir -p ~/.ssh
 
-    - name: Setup SSH Key
-      run: |
-        echo "${{ secrets.ANSIBLE }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.ANSIBLE }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 'latest'
 
-    - name: Install Ansible
-      run: |
-        python -m pip install --upgrade pip
-        pip install ansible
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible --upgrade
 
-    - name: Run Ansible playbook
-      run: ansible-playbook --ssh-common-args "-o StrictHostKeyChecking=no" apache.yml
+      - name: Run Ansible playbook
+        run: ansible-playbook --ssh-common-args "-o StrictHostKeyChecking=no" apache.yml
