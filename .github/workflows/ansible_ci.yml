@@ -22,7 +22,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
@@ -32,4 +32,4 @@ jobs:
         pip install ansible
 
     - name: Run Ansible playbook
-      run: StrictHostKeyChecking=no ansible-playbook  apache.yml
+      run: ansible-playbook -o StrictHostKeyChecking=no apache.yml
